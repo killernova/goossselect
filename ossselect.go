@@ -97,7 +97,7 @@ func NewSelector(query string, options ...func(*Selector) error) (*Selector, err
 	return s, nil
 }
 
-func NewConfig(options ...func(*Config) error) (*Config, error) {
+func NewConfig(options ...func(*Config)) *Config {
 	c := &Config{
 		Timeout:               10 * time.Second,
 		KeepAlive:             10 * time.Second,
@@ -107,11 +107,9 @@ func NewConfig(options ...func(*Config) error) (*Config, error) {
 	}
 
 	for _, f := range options {
-		if err := f(c); err != nil {
-			return nil, err
-		}
+		f(c)
 	}
-	return c, nil
+	return c
 }
 
 func toXML(s interface{}) ([]byte, error) {

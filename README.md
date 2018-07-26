@@ -18,10 +18,9 @@ You can also set options for this generator with defined function or function de
 
 ### Step 2: create a new config object
 ```go
-c, err := gol.NewConfig(func(conf *gol.Config) error {
+c := gol.NewConfig(func(conf *gol.Config) {
 		conf.AccessKeyID = "ercbcv43tgert"
 		conf.AccessKeySecret = "sferg456ghvbsf435435"
-		return nil
 	})
 ```
 
