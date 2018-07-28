@@ -26,7 +26,7 @@ c := gol.NewConfig(func(conf *gol.Config) {
 
 ### Step 3: call function
 ```go
-data, err = s.SelectQueryToFile("dwl-oss", "links.csv", c)
+data, err = s.SelectQuery("dwl-oss", "links.csv", c)
 ```
 or you can save data to file
 ```go
@@ -40,7 +40,7 @@ f, err := os.OpenFile("efg.csv", os.O_RDWR|os.O_CREATE, 0755)
 		fmt.Println(err)
 	}
 ```
-maybe you want query mate data
+maybe you want query meta data
 ```go
 m, err := gol.NewMeta()
 data, err = m.SelectMeta("dwl-oss", "links.csv", c)
