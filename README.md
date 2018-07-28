@@ -12,7 +12,7 @@ Ali OSS select package for go
 ### Step 1: create a new selector or meta
 `s, err := gol.NewSelector("Select * from ossobject")`
 
-You can also set options for this generator with defined function or function defined by yourself:
+You can also set options for this generator with predefined functions or functions defined by yourself:
 
 `s, err := gol.NewSelector("Select * from ossobject", gol.SetRange("line", 10, 333))`
 
@@ -57,7 +57,7 @@ type MetaResponse struct {
 
 ## OPTIONS
 
-Most of time you can use the default options, but if you want to change it, use defined functions as follows:
+Most of time you can use the default options, but if you want to change it, use predefined functions as follows:
 ```go
 # Selector:
 SetFileHeaderInfo(s string)
