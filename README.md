@@ -1,7 +1,7 @@
 # goossselect
 Ali OSS select package for go.
 
-Codes of Auth.go are basically come from [Ali OSS SDK](https://github.com/aliyun/aliyun-oss-go-sdk/blob/master/oss/auth.go)
+Codes of Auth.go basically come from [Ali OSS SDK](https://github.com/aliyun/aliyun-oss-go-sdk/blob/master/oss/auth.go)
 
 ## INSTALL
 `go get -u github.com/killernova/goossselect`
