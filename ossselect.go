@@ -4,16 +4,16 @@ import (
 	"encoding/xml"
 	"errors"
 
-	"fmt"
-	"net/http"
-	"crypto/tls"
-	"net"
-	"time"
-	"strconv"
 	"bytes"
-	"io/ioutil"
-	"os"
+	"crypto/tls"
+	"fmt"
 	"io"
+	"io/ioutil"
+	"net"
+	"net/http"
+	"os"
+	"strconv"
+	"time"
 )
 
 var InvalidValueErr = errors.New("invalid values for selector")
@@ -44,9 +44,9 @@ type Meta struct {
 }
 
 type MetaResponse struct {
-	Lines int64
-	Columns int64
-	Splits int64
+	Lines         int64
+	Columns       int64
+	Splits        int64
 	ContentLength int64
 }
 
@@ -60,6 +60,7 @@ type Conn struct {
 type Config struct {
 	AccessKeyID           string // accessId
 	AccessKeySecret       string // accessKey
+	Endpoint              string
 	Timeout               time.Duration
 	KeepAlive             time.Duration
 	TLSHandshakeTimeout   time.Duration
@@ -123,7 +124,7 @@ func toXML(s interface{}) ([]byte, error) {
 func getResponse(bucket, objectKey, action string, content []byte, config *Config) (*http.Response, error) {
 	now := getGmtIso8601(time.Now().Unix())
 	canonicalizedResource := "/" + bucket + "/" + objectKey + "?x-oss-process=csv/" + action
-	url := fmt.Sprintf("https://%s.oss-cn-hangzhou.aliyuncs.com/%s?x-oss-process=csv/" + action, bucket, objectKey)
+	url := fmt.Sprintf(("https://%s.%s/%s?x-oss-process=csv/" + action), bucket, config.Endpoint, objectKey)
 	c := &http.Client{
 		Transport: &http.Transport{
 			// Proxy:           http.ProxyFromEnvironment,
@@ -221,9 +222,9 @@ func (m *Meta) SelectMeta(bucket, objectKey string, config *Config) (*MetaRespon
 		return nil, err
 	}
 	mr := &MetaResponse{
-		Lines: lines,
-		Columns: columns,
-		Splits: splits,
+		Lines:         lines,
+		Columns:       columns,
+		Splits:        splits,
 		ContentLength: resp.ContentLength,
 	}
 	return mr, nil
